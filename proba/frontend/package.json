@@ -1,0 +1,35 @@
+{
+  "name": "1lab",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "npm run clean; tsc; npm run copy-views; npm run copy-public",
+    "clean": "shx rm -rf dist",
+    "copy-views": "shx cp -r src/views/ dist",
+    "copy-public": "shx cp -r src/public/ dist/public",
+    "start": "node dist/client.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "concurrently": "^9.0.1",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "express": "^4.21.1",
+    "express-oauth2-jwt-bearer": "^1.6.0",
+    "express-openid-connect": "^2.17.1",
+    "pg": "^8.13.0",
+    "pug": "^3.0.3",
+    "qrcode": "^1.5.4",
+    "shx": "^0.3.4"
+  },
+  "devDependencies": {
+    "@types/cors": "^2.8.17",
+    "@types/express": "^5.0.0",
+    "@types/pg": "^8.11.10",
+    "@types/qrcode": "^1.5.5"
+  }
+}

@@ -1,0 +1,121 @@
+body {
+    background-color: black;
+    color: white;
+    font-family: Arial, sans-serif;
+    margin: 0px;
+}
+  
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 93vh;
+}
+  
+.broj_generiranih {
+    font-size: 5rem;
+    text-align: center;
+    margin-bottom: 20px;
+    font-family: monospace
+}
+
+#broj-ulaznica {
+    font-weight: bold; 
+    text-shadow: 8px 8px 8px rgb(128 128 128);
+}
+  
+#naslov {
+    font-size: 1.5rem;
+    color: rgb(146, 83, 209);
+    text-align: center;
+    margin-bottom: 20px;
+}
+  
+.ulaznica-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+  
+.ulaznica-form input {
+    width: 300px;
+    margin-bottom: 10px;
+    padding: 10px;
+    font-size: 1rem;
+    border: none;
+    border-radius: 5px;
+}
+  
+.submit-button {
+    padding: 10px 20px;
+    background-color: rgb(146, 83, 209);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+    align-self: flex-end;
+    width: 300px
+}
+  
+.submit-button:hover {
+    background-color: #656667;
+}
+  
+input[type="number"]::-webkit-inner-spin-button, input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+input[type="number"] {
+    -moz-appearance: textfield;
+
+}
+
+#poruka {
+    margin: 20px;
+    width:300px;
+    border-radius: 5px;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.info{
+    display: none;
+    font-family: monospace;
+    font-size: xx-large;
+    border: 5px solid rgb(146, 83, 209);
+    padding-left: 5rem;
+    padding-right: 5rem;
+    border-style: dashed;
+}
+
+.house-icon {
+    font-size: 29px;
+    color: black;
+  }
+
+.header-container {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 20px;
+    background-color: #866bd4ac;
+  }
+  
+  .logout-button {
+    background-color: rgb(146, 83, 209);
+    color: white;
+    padding: 8px 16px;
+    text-decoration: none;
+    border-radius: 4px;
+  }
+  
+  .logout-button:hover {
+    background-color: #656667;
+  }
+
+  #username{
+    padding: 10px;
+  }

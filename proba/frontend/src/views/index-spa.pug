@@ -1,0 +1,24 @@
+html     
+    head  
+        script(src="https://cdn.auth0.com/js/auth0-spa-js/1.20/auth0-spa-js.production.js")
+        style 
+            include ../public/css/site.css
+        title Generator ulaznica
+    body 
+        div(class="header-container" id="header-container")
+            a(href="/") 
+                span(class="house-icon") 🏠︎
+            span(id="username")
+            button(class="logout-button" id="logout-button") Odjava
+        div(class="container")
+            h1(class="broj_generiranih") Generirano ulaznica: 
+                span(id="broj-ulaznica") ...
+            h2(id="naslov") Generiraj svoju ulaznicu sada!
+            
+            div(class="ulaznica-form", id="ulaznica-form")
+                input(type="number", id="OIB", placeholder="OIB", required)
+                input(type="text", id="Ime", placeholder="Ime", required)
+                input(type="text", id="Prezime", placeholder="Prezime", required)
+                button(id="submitBtn", class="submit-button") Generiraj!                  
+        script 
+            include ../public/js/site.js 

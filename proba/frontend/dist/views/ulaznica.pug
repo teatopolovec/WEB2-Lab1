@@ -1,0 +1,22 @@
+html
+  head
+    script(src="https://cdn.auth0.com/js/auth0-spa-js/1.20/auth0-spa-js.production.js")
+    style 
+      include ../public/css/site.css
+    title Ulaznica
+  body
+    header
+      div(class="header-container")
+        a(href="/") 
+          span(class="house-icon") 🏠︎
+        span(id="username")
+        button(class="logout-button" id="logout-button") Odjava
+    div(class="container")
+      h1(class="broj_generiranih") Ulaznica
+      div(class="info" id="info")
+        p OIB: <span id="oib"></span>
+        p Ime: <span id="ime"></span>
+        p Prezime: <span id="prezime"></span>
+        p Generirano: <span id="generirano"></span>
+    script 
+      include ../public/js/ulaznica.js 
