@@ -42,7 +42,7 @@ class Database {
                     first_name VARCHAR(255) NOT NULL,
                     last_name VARCHAR(255) NOT NULL,
                     oib VARCHAR(255) NOT NULL,
-                    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP + '2hours'::interval
+                    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
                 );
             `);
             console.log('Tablica kreirana ili već postoji.');
