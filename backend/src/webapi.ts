@@ -54,7 +54,7 @@ app.get('/ulaznica/:id', checkJwt,  async function (req, res) {
 
 app.post('/generirajUlaznicu', checkJwt, async function (req, res) {
     const {vatin, firstName, lastName} = req.body;
-    if (!vatin || vatin.length !== 11) {
+    if (!vatin || vatin.length !== 11 || !/^[0-9]+$/.test(vatin)) {
         res.status(400).json({ error: 'OIB mora imati 11 znamenki.' });
         return;
     }
