@@ -47,17 +47,10 @@ async function fetchBrojUlaznica() {
     const user = await auth0.getUser();
     document.getElementById('username').textContent = user.email;
   }
-  const x = await m2m(); 
-  const i = await x.json();
-  const token = i.access_token;
   try {
     const rez = await render(); 
     serverUri = rez ? rez : "http://127.0.0.1:4071";
-    const response = await fetch(`${serverUri}/brojUlaznica`, {
-        headers: {
-        Authorization: `Bearer ${token}`
-        }
-    });
+    const response = await fetch(`${serverUri}/brojUlaznica`);
     if (!response.ok) { 
       const errorData = await response.json();
       throw new Error(errorData.error || 'Greška na serveru!');
