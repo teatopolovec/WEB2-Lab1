@@ -13,7 +13,6 @@ const checkJwt = auth({
   audience: 'ulaznice',
   issuerBaseURL: `${authServer}`,
 });
-app.use(checkJwt);
 
 async function generirajQR(url : string){
     try {
@@ -34,7 +33,7 @@ app.get('/brojUlaznica', async function (req, res) {
     }
 });
 
-app.get('/ulaznica/:id',  async function (req, res) {
+app.get('/ulaznica/:id', checkJwt,  async function (req, res) {
     const id = req.params.id;
     const regex = /^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i;
     if (!regex.test(id)){
@@ -53,7 +52,7 @@ app.get('/ulaznica/:id',  async function (req, res) {
     }
 });
 
-app.post('/generirajUlaznicu', async function (req, res) {
+app.post('/generirajUlaznicu', checkJwt, async function (req, res) {
     const {vatin, firstName, lastName} = req.body;
     if (!vatin || vatin.length !== 11) {
         res.status(400).json({ error: 'OIB mora imati 11 znamenki.' });
