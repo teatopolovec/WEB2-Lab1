@@ -3,6 +3,8 @@ import db from './database';
 import QRCode from 'qrcode';
 import cors from 'cors';
 import { auth } from 'express-oauth2-jwt-bearer';
+import jwt from 'jsonwebtoken';
+import { Request, Response, NextFunction } from 'express';
 
 const app = express();
 app.use(cors())
@@ -13,6 +15,19 @@ const checkJwt = auth({
   audience: 'ulaznice',
   issuerBaseURL: `${authServer}`,
 });
+
+function checkScope(s: string) {
+    return function (req: Request, res: Response, next: NextFunction) {
+      const authHeader = req.headers.authorization;
+      const token = authHeader!.split(' ')[1];
+      const decoded = jwt.decode(token) as { scope?: string };
+      if (decoded && decoded.scope && decoded.scope.includes(s)) {
+        return next();
+      } else {
+        res.status(403).send(`Scope: ${s} required`);
+      }
+    };
+}
 
 async function generirajQR(url : string){
     try {
@@ -33,7 +48,7 @@ app.get('/brojUlaznica', async function (req, res) {
     }
 });
 
-app.get('/ulaznica/:id', checkJwt,  async function (req, res) {
+app.get('/ulaznica/:id', checkJwt, checkScope('openid'), async function (req, res) {
     const id = req.params.id;
     const regex = /^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i;
     if (!regex.test(id)){
@@ -52,7 +67,7 @@ app.get('/ulaznica/:id', checkJwt,  async function (req, res) {
     }
 });
 
-app.post('/generirajUlaznicu', checkJwt, async function (req, res) {
+app.post('/generirajUlaznicu', checkJwt, checkScope('generiraj:ulaznice'), async function (req, res) {
     const {vatin, firstName, lastName} = req.body;
     if (!vatin || vatin.length !== 11 || !/^[0-9]+$/.test(vatin)) {
         res.status(400).json({ error: 'OIB mora imati 11 znamenki.' });

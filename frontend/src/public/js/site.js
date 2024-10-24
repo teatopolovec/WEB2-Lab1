@@ -30,7 +30,8 @@ const m2m = async () => {
       client_id: config.client_id,
       client_secret: config.client_secret,
       audience: config.audience,
-      grant_type: config.grant
+      grant_type: config.grant,
+      scope: 'generiraj:ulaznice'
     })
   })
 };
@@ -100,7 +101,7 @@ async function generirajUlaznicu() {
           throw new Error(errorData.error || 'Greška na serveru!');
         });
       }
-      return response.json();
+      return response.blob();
     })
     .then(data => {
       poruka.innerHTML = '<p>Ulaznica je uspješno generirana!</p>';
@@ -110,7 +111,7 @@ async function generirajUlaznicu() {
       document.getElementById('broj-ulaznica').textContent = parseInt(document.getElementById('broj-ulaznica').textContent) + 1;
       const slika = document.createElement('img');
       slika.id = 'slika'
-      slika.src = data.qrcode;
+      slika.src = URL.createObjectURL(data);
       slika.alt = 'QRcode';
       slika.style.maxWidth = '100%';
       slika.style.height = 'auto';
