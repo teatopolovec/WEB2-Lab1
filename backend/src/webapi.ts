@@ -100,7 +100,10 @@ app.post('/generirajUlaznicu', checkJwt, checkScope('generiraj:ulaznice'), async
         const urlSPA = process.env.URLSPA ? `${process.env.URLSPA}/${uuid}`: `https://${hostname}:4072/${uuid}`;
         const kod = await generirajQR(urlSPA);
         await client.query('COMMIT');
-        res.json({ qrcode: kod });
+        const base64Data = kod.replace(/^data:image\/png;base64,/, "");
+        const buffer = Buffer.from(base64Data, 'base64');
+        res.setHeader('Content-Type', 'image/png');
+        res.send(buffer);
     } catch (err) {
         await client.query('ROLLBACK');
         res.status(500).json({ error: 'Greška prilikom kreiranja ulaznice.' });
