@@ -17,7 +17,7 @@ class Database {
         this.pool = new Pool({
             user: process.env.DB_USER,
             host: process.env.DB_HOST,
-            database: 'ulaznice_p3l5',
+            database: 'ulaznice_p3l5_by2l',
             password: process.env.DB_PASSWORD,
             port: 5432,
             ssl : true
